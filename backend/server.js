@@ -38,12 +38,20 @@ app.post('/transcript', async (req, res) => {
     return res.status(400).send('Video URL is required');
   }
 
-  const transcriptText = await fetchTranscript(videoUrl);
-  if (transcriptText) {
+
+  try {
+    const transcriptText = await fetchTranscript(videoUrl);
     res.send(transcriptText);
-  } else {
+  } catch (error) {
+    console.error('Error in /transcript route:', error);
     res.status(500).send('Failed to fetch transcript');
   }
+//   const transcriptText = await fetchTranscript(videoUrl);
+//   if (transcriptText) {
+//     res.send(transcriptText);
+//   } else {
+//     res.status(500).send('Failed to fetch transcript');
+//   }
 });
 
 app.listen(PORT, () => {
