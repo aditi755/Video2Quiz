@@ -9,7 +9,15 @@ const PORT = 3000;
 
 // Use middleware to parse JSON bodies and enable CORS
 app.use(express.json());
-app.use(cors());
+
+https://video2-quiz.vercel.app/
+const frontendUrl = 'https://video2-quiz.vercel.app/';
+
+app.use(cors({
+  origin: frontendUrl,
+}));
+app.use(express.json());
+
 
 async function fetchTranscript(videoUrl) {
   try {
