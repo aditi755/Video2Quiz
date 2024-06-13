@@ -30,7 +30,7 @@ function App() {
 
   const handleTranscriptFetch = async () => {
     try {
-      const response = await fetch('http://localhost:3000/transcript', {
+      const response = await fetch('https://video2-quiz-hfa8.vercel.app/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
