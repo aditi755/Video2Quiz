@@ -262,8 +262,14 @@ app.post('/transcript', async (req, res) => {
 
   try {
     const transcriptText = await fetchTranscript(videoUrl);
+    if (!transcriptText) {
+      console.error('Failed to fetch transcript in /transcript ');
+      return res.status(500).send('Failed to fetch transcript');
+    }
+
     const quizQuestions = await generateQuizQuestions(transcriptText);
-    console.log("quizquestions", quizQuestions)
+    console.log('Generated quiz questions:', quizQuestions); // Log the generated quiz questions
+
     res.json(quizQuestions);
     
   } catch (error) {
