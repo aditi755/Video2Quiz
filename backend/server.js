@@ -169,7 +169,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors({
-  origin: ['https://video2-quiz.vercel.app'],
+  origin: 'https://video2-quiz.vercel.app',
   methods: ["POST", "GET"],
   credentials: true
 }));
