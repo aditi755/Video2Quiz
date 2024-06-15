@@ -178,8 +178,8 @@ const App = () => {
   const [testResponse, setTestResponse] = useState('');
 
   const handleTestRequest = async () => {
-    try {
-      const response = await axios.get('https://video2-quiz.vercel.app/test');
+    try {   
+      const response = await axios.get('https://video2-quiz-hfa8.vercel.app/test');
       console.log('Response from server:', response.data);
       setTestResponse(response.data);
     } catch (error) {
