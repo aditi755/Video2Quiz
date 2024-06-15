@@ -273,8 +273,8 @@ app.post('/transcript', async (req, res) => {
     res.json(quizQuestions);
     
   } catch (error) {
-    console.error('Error in /transcript route:', error);
-    res.status(500).send('Failed to generate quiz questions');
+    console.error('Error in generateQuizQuestions:', error);
+    throw new Error('Failed to generate quiz questions');
   }
 });
 
