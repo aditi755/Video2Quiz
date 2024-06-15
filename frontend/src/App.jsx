@@ -215,7 +215,7 @@ const App = () => {
 const handleTranscriptFetch = async () => {
   console.log('Fetching transcript for video URL:', videoUrl);
   try {
-    const response = await axios.post('https://video2-quiz-hfa8.vercel.app/transcript', {
+    const response = await axios.post('/api/transcript', {
       videoUrl: String(videoUrl)
     }, {
       headers: {
