@@ -169,36 +169,61 @@
 // export default App;
 
 import React, { useState } from 'react';
-
+import axios from 'axios'
 const App = () => {
   const [quiz, setQuiz] = useState(null);
   const [error, setError] = useState(null);
   const [videoUrl, setVideoUrl] = useState('');
 
-   const handleTranscriptFetch = async () => {
-+    console.log('Fetching transcript for video URL:', videoUrl);
-     try {
-       const response = await fetch('https://video2-quiz-hfa8.vercel.app/transcript', {     
-         method: 'POST',
-         headers: {
-           'Content-Type': 'application/json',
-         },
-         body: JSON.stringify({ videoUrl }),
-       });
+//    const handleTranscriptFetch = async () => {
+// +    console.log('Fetching transcript for video URL:', videoUrl);
+//      try {
+//        const response = await fetch('https://video2-quiz-hfa8.vercel.app/transcript', {     
+//          method: 'POST',
+//          headers: {
+//            'Content-Type': 'application/json',
+//          },
+//          body: JSON.stringify({ videoUrl }),
+//        });
  
-       if (!response.ok) {
-+        console.error('Error fetching transcript:', response.status);
-         throw new Error('Failed to fetch transcript');
-       }
+//        if (!response.ok) {
+// +        console.error('Error fetching transcript:', response.status);
+//          throw new Error('Failed to fetch transcript');
+//        }
  
-       const transcript = await response.json();
-+      console.log('Transcript fetched:', transcript);
-       setQuiz(transcript);
-     } catch (error) {
-       console.error('Error fetching transcript:', error);
-       setError('Failed to fetch transcript. Please try again.');
-     }
-   };
+//        const transcript = await response.json();
+// +      console.log('Transcript fetched:', transcript);
+//        setQuiz(transcript);
+//      } catch (error) {
+//        console.error('Error fetching transcript:', error);
+//        setError('Failed to fetch transcript. Please try again.');
+//      }
+//    };
+
+const handleTranscriptFetch = async () => {
+  console.log('Fetching transcript for video URL:', videoUrl);
+  try {
+    const response = await axios.post('https://video2-quiz-hfa8.vercel.app/transcript', {
+      videoUrl: String(videoUrl)
+    }, {
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    if (response.status !== 200) {
+      console.error('Error fetching transcript:', response.status);
+      throw new Error('Failed to fetch transcript');
+    }
+
+    const transcript = response.data;
+    console.log('Transcript fetched:', transcript);
+    setQuiz(transcript); // Assuming setQuiz is defined somewhere in your component
+  } catch (error) {
+    console.error('Error fetching transcript:', error);
+    setError('Failed to fetch transcript. Please try again.'); // Assuming setError is defined somewhere in your component
+  }
+};
 
   const handleSubmit = (event) => {
     event.preventDefault();
