@@ -175,6 +175,18 @@ const App = () => {
   const [error, setError] = useState(null);
   const [videoUrl, setVideoUrl] = useState('');
 
+  const [testResponse, setTestResponse] = useState('');
+
+  const handleTestRequest = async () => {
+    try {
+      const response = await axios.get('https://video2-quiz.vercel.app/test');
+      console.log('Response from server:', response.data);
+      setTestResponse(response.data);
+    } catch (error) {
+      console.error('Error fetching test data:', error);
+    }
+  };
+
 //    const handleTranscriptFetch = async () => {
 // +    console.log('Fetching transcript for video URL:', videoUrl);
 //      try {
@@ -232,6 +244,11 @@ const handleTranscriptFetch = async () => {
 
   return (
     <div>
+  
+  <button onClick={handleTestRequest}>Test GET Request</button>
+  {testResponse && <p>Response from server: {testResponse}</p>}
+
+
       <h1>Video Quiz Generator</h1>
       <form onSubmit={handleSubmit}>
         <input
